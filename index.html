@@ -1,9 +1,424 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Martha Caro</title>
+
+    <title>Marta Caro | Full Stack Developer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Iconos de tecnologías -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body></body>
+
+  <body>
+    <!-- Fondo -->
+    <div class="background-glow"></div>
+    <div class="particles"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <div class="logo"><span>&lt;</span> MC <span>/&gt;</span></div>
+
+      <nav>
+        <button data-slide="0">Inicio</button>
+        <button data-slide="1">Sobre mí</button>
+        <button data-slide="2">Habilidades</button>
+        <button data-slide="3">Proyectos</button>
+        <button data-slide="4">Experiencia</button>
+        <button data-slide="5">Contacto</button>
+      </nav>
+    </header>
+
+    <!-- PORTFOLIO -->
+    <main class="portfolio">
+      <!-- BOTÓN IZQUIERDO -->
+      <button class="arrow arrow-left" id="prevBtn">&#10094;</button>
+
+      <!-- CARRUSEL -->
+      <section class="carousel" id="carousel">
+        <!-- ========================= -->
+        <!-- TARJETA SOBRE MÍ -->
+        <!-- ========================= -->
+
+        <article class="card card-about">
+          <span class="card-number">01</span>
+
+          <h2>Sobre mí</h2>
+
+          <div class="line"></div>
+
+          <p>
+            Soy Marta Caro, desarrolladora de software enfocada en crear
+            soluciones web funcionales, modernas y pensadas para las personas.
+          </p>
+
+          <p>
+            Me gusta combinar desarrollo, diseño y experiencia de usuario para
+            convertir ideas en productos digitales.
+          </p>
+
+          <div class="mini-code">
+            <span>const</span> developer = {<br />
+
+            &nbsp;&nbsp;nombre:
+            <strong>"Marta Caro"</strong>,<br />
+
+            &nbsp;&nbsp;rol:
+            <strong>"Full Stack Developer"</strong><br />
+
+            };
+          </div>
+        </article>
+
+        <!-- ========================= -->
+        <!-- TARJETA HABILIDADES -->
+        <!-- ========================= -->
+
+        <article class="card card-skills">
+          <span class="card-number">02</span>
+
+          <h2>Habilidades</h2>
+
+          <div class="line"></div>
+
+          <p class="skills-description">
+            Tecnologías con las que he trabajado durante mi formación y
+            proyectos.
+          </p>
+
+          <div class="skills-grid">
+            <div class="skill java">
+              <i class="devicon-java-plain"></i>
+              <span>Java</span>
+            </div>
+
+            <div class="skill javascript">
+              <i class="devicon-javascript-plain"></i>
+              <span>JavaScript</span>
+            </div>
+
+            <div class="skill angular">
+              <i class="devicon-angularjs-plain"></i>
+              <span>Angular</span>
+            </div>
+
+            <div class="skill spring">
+              <i class="devicon-spring-plain"></i>
+              <span>Spring</span>
+            </div>
+
+            <div class="skill node">
+              <i class="devicon-nodejs-plain"></i>
+              <span>Node.js</span>
+            </div>
+
+            <div class="skill html">
+              <i class="devicon-html5-plain"></i>
+              <span>HTML5</span>
+            </div>
+
+            <div class="skill css">
+              <i class="devicon-css3-plain"></i>
+              <span>CSS3</span>
+            </div>
+
+            <div class="skill sql">
+              <i class="devicon-postgresql-plain"></i>
+              <span>PostgreSQL</span>
+            </div>
+
+            <div class="skill git">
+              <i class="devicon-git-plain"></i>
+              <span>Git</span>
+            </div>
+
+            <div class="skill figma">
+              <i class="devicon-figma-plain"></i>
+              <span>Figma</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ========================= -->
+        <!-- TARJETA CENTRAL -->
+        <!-- ========================= -->
+
+        <article class="card card-center">
+          <div class="code-decoration code-left">&lt;code&gt;</div>
+
+          <div class="code-decoration code-right">{ JS }</div>
+
+          <!-- CANVAS DEL PUNTILLISMO -->
+
+          <div class="portrait-container">
+            <canvas id="portraitCanvas"></canvas>
+
+            <!-- Imagen original -->
+            <img id="sourcePhoto" src="img/Martha.jpeg" alt="Marta Caro" />
+          </div>
+
+          <div class="center-content">
+            <span class="greeting"> HOLA, SOY </span>
+
+            <h1>Marta Caro</h1>
+
+            <p>Full Stack Developer</p>
+
+            <button class="main-button" data-slide="1">
+              CONÓCEME
+              <span>→</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- ========================= -->
+        <!-- PROYECTOS -->
+        <!-- ========================= -->
+
+        <article class="card card-projects">
+          <span class="card-number">03</span>
+
+          <h2>Proyectos destacados</h2>
+
+          <div class="line"></div>
+
+          <div class="projects-grid">
+            <!-- PROYECTO 1 -->
+
+            <div class="project">
+              <div class="project-image project-one">
+                <span>&lt;/&gt;</span>
+              </div>
+
+              <h3>Safety for People</h3>
+
+              <p>
+                Aplicación web para la gestión y comercialización de
+                dispositivos de localización.
+              </p>
+
+              <div class="project-tags">
+                <span>Java</span>
+                <span>Spring</span>
+                <span>Angular</span>
+              </div>
+
+              <div class="project-buttons">
+                <a href="#" target="_blank"> GitHub </a>
+
+                <a href="#" target="_blank"> Demo </a>
+              </div>
+            </div>
+
+            <!-- PROYECTO 2 -->
+
+            <div class="project">
+              <div class="project-image project-two">
+                <span>JS</span>
+              </div>
+
+              <h3>Planificador</h3>
+
+              <p>
+                Aplicación para organizar tareas, calendario semanal y
+                productividad.
+              </p>
+
+              <div class="project-tags">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JS</span>
+              </div>
+
+              <div class="project-buttons">
+                <a href="#" target="_blank"> GitHub </a>
+
+                <a href="#" target="_blank"> Demo </a>
+              </div>
+            </div>
+
+            <!-- PROYECTO 3 -->
+
+            <div class="project">
+              <div class="project-image project-three">
+                <span>API</span>
+              </div>
+
+              <h3>API Backend</h3>
+
+              <p>
+                Desarrollo de API REST con arquitectura por capas y base de
+                datos.
+              </p>
+
+              <div class="project-tags">
+                <span>Node</span>
+                <span>SQL</span>
+              </div>
+
+              <div class="project-buttons">
+                <a href="#" target="_blank"> GitHub </a>
+
+                <a href="#" target="_blank"> Demo </a>
+              </div>
+            </div>
+          </div>
+
+          <button class="more-projects" id="moreProjects">
+            Más proyectos
+            <span>→</span>
+          </button>
+        </article>
+
+        <!-- ========================= -->
+        <!-- EXPERIENCIA -->
+        <!-- ========================= -->
+
+        <article class="card card-experience">
+          <span class="card-number">04</span>
+
+          <h2>Experiencia</h2>
+
+          <div class="line"></div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="date"> 2025 </span>
+
+              <h3>Full Stack Developer Junior</h3>
+
+              <h4>Easesolutions</h4>
+
+              <p>
+                Desarrollo de aplicaciones web, integración frontend/backend,
+                APIs y bases de datos.
+              </p>
+            </div>
+
+            <div class="timeline-item">
+              <span class="date"> 2025 </span>
+
+              <h3>Generation Colombia</h3>
+
+              <h4>Full Stack Java</h4>
+
+              <p>
+                Formación intensiva en desarrollo web, Java, bases de datos,
+                Git, APIs y metodologías ágiles.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- ========================= -->
+        <!-- CONTACTO -->
+        <!-- ========================= -->
+
+        <article class="card card-contact">
+          <span class="card-number">05</span>
+
+          <h2>¿Trabajamos juntos?</h2>
+
+          <div class="line"></div>
+
+          <p>
+            Estoy interesada en oportunidades como desarrolladora junior y en
+            proyectos donde pueda seguir creciendo profesionalmente.
+          </p>
+
+          <div class="contact-links">
+            <a href="mailto:tu-correo@gmail.com">
+              <span>✉</span>
+              Correo
+            </a>
+
+            <a href="https://github.com/MarthajCaro" target="_blank">
+              <span>◈</span>
+              GitHub
+            </a>
+
+            <a href="https://linkedin.com/in/marthacaro" target="_blank">
+              <span>in</span>
+              LinkedIn
+            </a>
+          </div>
+
+          <button class="main-button" data-slide="0">
+            VOLVER AL INICIO
+            <span>↻</span>
+          </button>
+        </article>
+      </section>
+
+      <!-- BOTÓN DERECHO -->
+
+      <button class="arrow arrow-right" id="nextBtn">&#10095;</button>
+
+      <!-- INDICADORES -->
+
+      <div class="indicators" id="indicators">
+        <span class="indicator active"></span>
+        <span class="indicator"></span>
+        <span class="indicator"></span>
+        <span class="indicator"></span>
+        <span class="indicator"></span>
+        <span class="indicator"></span>
+      </div>
+    </main>
+
+    <!-- MODAL MÁS PROYECTOS -->
+
+    <div class="projects-modal" id="projectsModal">
+      <div class="modal-content">
+        <button class="close-modal" id="closeModal">×</button>
+
+        <h2>Más proyectos</h2>
+
+        <div class="modal-line"></div>
+
+        <div class="more-projects-grid">
+          <div>
+            <span class="modal-icon">01</span>
+            <h3>Clínica App</h3>
+            <p>
+              Aplicación desarrollada con Java, Spring Boot y base de datos.
+            </p>
+          </div>
+
+          <div>
+            <span class="modal-icon">02</span>
+            <h3>CoWork API</h3>
+            <p>API REST para administración de espacios y usuarios.</p>
+          </div>
+
+          <div>
+            <span class="modal-icon">03</span>
+            <h3>Weather App</h3>
+            <p>Aplicación web de consulta de información climática.</p>
+          </div>
+
+          <div>
+            <span class="modal-icon">04</span>
+            <h3>VetCare</h3>
+            <p>Sistema de gestión para servicios veterinarios.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
 </html>
