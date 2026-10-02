@@ -16,7 +16,7 @@ const prevBtn = document.getElementById("prevBtn");
 
 const navButtons = document.querySelectorAll("[data-slide]");
 
-let currentIndex = 2;
+let currentIndex = 1;
 
 const totalCards = cards.length;
 

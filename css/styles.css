@@ -29,30 +29,58 @@ html {
 
 
 body {
-
     min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at 50% 45%,
-            rgba(0, 217, 255, 0.08),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(155, 92, 255, 0.10),
-            transparent 30%
-        ),
-        var(--bg);
-
+    
+    /* Fondo base azul noche ultra oscuro */
+    background-color: #020611; 
+    
+    /* Destellos de luz idénticos a los tonos de tu imagen de referencia */
+    background-image: 
+        /* Resplandor cian a la izquierda */
+        radial-gradient(circle at 15% 50%, rgba(0, 217, 255, 0.15), transparent 45%),
+        /* Resplandor violeta/magenta a la derecha */
+        radial-gradient(circle at 85% 40%, rgba(155, 92, 255, 0.12), transparent 50%),
+        /* Resplandor tenue en el centro-abajo */
+        radial-gradient(circle at 50% 90%, rgba(0, 217, 255, 0.05), transparent 60%);
+    
     color: var(--text);
-
     font-family: "Inter", sans-serif;
-
     overflow: hidden;
+    position: relative;
 }
 
+/* Capa de cuadrícula y nodos tecnológicos */
+body::before {
+    content: "";
+    position: fixed;
+    /* Hacemos el contenedor más grande para que las luces se muevan fluidamente por los bordes */
+    inset: -20%;
+    
+    /* Dos grandes manchas de luz suave */
+    background-image: 
+        radial-gradient(circle at 30% 50%, rgba(0, 217, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 70% 60%, rgba(155, 92, 255, 0.12) 0%, transparent 45%);
+    
+    pointer-events: none;
+    z-index: 0;
+    
+    /* Movimiento lento y relajante */
+    animation: auroraFloat 15s ease-in-out infinite alternate;
+}
 
+@keyframes auroraFloat {
+    0% {
+        transform: scale(1) translate(0px, 0px);
+    }
+    50% {
+        /* Las luces se expanden ligeramente y se mueven en diagonal */
+        transform: scale(1.2) translate(50px, -40px);
+    }
+    100% {
+        /* Vuelven a encogerse y se mueven en dirección contraria */
+        transform: scale(1.1) translate(-30px, 60px);
+    }
+}
 /* ========================= */
 /* FONDO */
 /* ========================= */
@@ -82,35 +110,6 @@ body {
 }
 
 
-body::before {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,0.02) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,0.02) 1px,
-            transparent 1px
-        );
-
-    background-size: 50px 50px;
-
-    mask-image: radial-gradient(
-        circle at center,
-        black,
-        transparent 75%
-    );
-
-    pointer-events: none;
-}
 
 
 /* ========================= */
@@ -166,20 +165,45 @@ body::before {
 
 
 .navbar nav button {
+    background: rgba(5, 18, 35, 0.65);
 
-    background: transparent;
+    border: 1px solid rgba(0, 217, 255, 0.08);
 
-    border: none;
+    color: #d9e7f5;
 
-    color: #8490a7;
-
-    padding: 10px 14px;
+    padding: 9px 14px;
 
     cursor: pointer;
 
     font-size: 13px;
 
-    transition: 0.3s;
+    font-weight: 500;
+
+    letter-spacing: 0.3px;
+
+    border-radius: 20px;
+
+    transition:
+        color 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.navbar nav button:hover {
+    color: #ffffff;
+
+    background:
+        rgba(0, 217, 255, 0.10);
+
+    border-color:
+        rgba(0, 217, 255, 0.45);
+
+    box-shadow:
+        0 0 18px rgba(0, 217, 255, 0.10);
+
+    text-shadow:
+        0 0 8px rgba(0, 217, 255, 0.7);
 }
 
 
@@ -273,6 +297,10 @@ body::before {
     overflow: hidden;
 }
 
+.card-projects {
+    width: min(850px, 90vw);
+}
+
 
 .card::before {
 
@@ -310,7 +338,7 @@ body::before {
 
 .card p {
 
-    color: var(--muted);
+    color: var(--text);
 
     font-size: 14px;
 
@@ -771,13 +799,16 @@ body::before {
 /* ========================= */
 
 .projects-grid {
-
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    width: 100%;
+}
 
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 12px;
+.project {
+    min-width: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 
@@ -866,10 +897,10 @@ body::before {
 .project p {
 
     font-size: 10px;
-
     line-height: 1.5;
-
     margin-bottom: 10px;
+    overflow-wrap: anywhere;
+    word-break: normal;
 }
 
 
@@ -905,8 +936,14 @@ body::before {
     display: flex;
 
     gap: 5px;
+    flex-wrap: wrap;
 }
 
+.project-buttons a {
+    min-width: 0;
+    flex: 1;
+    text-align: center;
+}
 
 .project-buttons a {
 
@@ -1300,39 +1337,98 @@ body::before {
 /* RESPONSIVE */
 /* ========================= */
 
-@media(max-width: 1000px) {
+/* =====================================================
+   RESPONSIVE TABLET
+   ===================================================== */
+
+@media (max-width: 1100px) {
+
+    .navbar {
+        padding: 0 25px;
+    }
 
     .navbar nav {
+        gap: 2px;
+    }
 
-        display: none;
+    .navbar nav button {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .carousel {
+        width: 90vw;
     }
 
     .card.left {
-
         transform:
-            translateX(-330px)
-            scale(0.75);
+            translateX(-340px)
+            scale(0.72);
 
-        opacity: 0.3;
+        opacity: 0.25;
     }
 
     .card.right {
-
         transform:
-            translateX(330px)
-            scale(0.75);
+            translateX(340px)
+            scale(0.72);
 
-        opacity: 0.3;
+        opacity: 0.25;
     }
 
+    .arrow-left {
+        left: 15px;
+    }
+
+    .arrow-right {
+        right: 15px;
+    }
 }
 
 
-@media(max-width: 700px) {
+/* =====================================================
+   TABLET PEQUEÑA
+   ===================================================== */
+
+@media (max-width: 850px) {
 
     body {
-
         overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .navbar {
+        height: auto;
+        min-height: 70px;
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        padding:
+            18px
+            15px;
+    }
+
+    .navbar nav {
+
+        width: 100%;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        padding-bottom: 5px;
+
+        scrollbar-width: none;
+    }
+
+    .navbar nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .navbar nav button {
+        flex-shrink: 0;
     }
 
     .portfolio {
@@ -1341,8 +1437,137 @@ body::before {
 
         height: auto;
 
-        padding: 100px 20px;
+        padding:
+            150px
+            50px
+            90px;
     }
+
+    .carousel {
+
+        width: 100%;
+
+        height: 620px;
+    }
+
+    /*
+     * En tablet mostramos solamente
+     * la tarjeta activa.
+     */
+
+    .card.left,
+    .card.right {
+
+        opacity: 0;
+
+        pointer-events: none;
+
+        transform:
+            translateX(0)
+            scale(0.8);
+    }
+
+    .card.active {
+
+        width: min(
+            90vw,
+            650px
+        );
+    }
+
+    .arrow {
+        z-index: 80;
+    }
+}
+
+
+/* =====================================================
+   CELULAR
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+
+    /* -------------------------
+       NAV
+       ------------------------- */
+
+    .navbar {
+
+        position: fixed;
+
+        top: 0;
+
+        width: 100%;
+
+        background:
+            rgba(2, 7, 17, 0.88);
+
+        backdrop-filter:
+            blur(15px);
+
+        border-bottom:
+            1px solid
+            rgba(0,217,255,0.08);
+
+        padding:
+            14px
+            10px;
+    }
+
+
+    .logo {
+
+        font-size: 18px;
+
+    }
+
+
+    .navbar nav {
+
+        max-width: 100%;
+
+        overflow-x: auto;
+
+        gap: 4px;
+
+        padding:
+            3px
+            5px;
+    }
+
+
+    .navbar nav button {
+
+        font-size: 11px;
+
+        padding:
+            8px
+            11px;
+    }
+
+
+    /* -------------------------
+       PORTFOLIO
+       ------------------------- */
+
+    .portfolio {
+
+        min-height: 100vh;
+
+        height: auto;
+
+        padding:
+            150px
+            15px
+            100px;
+    }
+
 
     .carousel {
 
@@ -1351,43 +1576,359 @@ body::before {
         height: 650px;
     }
 
+
+    /* -------------------------
+       TARJETA
+       ------------------------- */
+
     .card {
 
-        width: 90vw;
+        width:
+            calc(100vw - 40px);
 
-        max-width: 400px;
+        max-width: 430px;
+
+        min-height: 560px;
+
+        padding:
+            30px
+            22px;
+
+        border-radius: 16px;
     }
+
+
+    .card.active {
+
+        width:
+            calc(100vw - 40px);
+
+        max-width: 430px;
+    }
+
 
     .card.left,
-    .card.right {
+    .card.right,
+    .card.far-left,
+    .card.far-right {
 
         opacity: 0;
+
+        transform:
+            translateX(0)
+            scale(0.85);
+
+        pointer-events: none;
     }
+
+
+    /* -------------------------
+       FOTO
+       ------------------------- */
+
+    .card-center {
+
+        padding: 0;
+
+        min-height: 590px;
+    }
+
+
+    .portrait-container {
+
+        height: 350px;
+
+        top: 15px;
+    }
+
+
+    .center-content {
+
+        padding:
+            25px
+            20px;
+    }
+
+
+    .center-content h1 {
+
+        font-size: 34px;
+    }
+
+
+    /* -------------------------
+       HABILIDADES
+       ------------------------- */
+
+    .skills-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+    }
+
+
+    .skill {
+
+        padding: 9px;
+
+        gap: 8px;
+    }
+
+
+    .skill i {
+
+        font-size: 24px;
+    }
+
+
+    .skill span {
+
+        font-size: 11px;
+    }
+
+
+    /* -------------------------
+       PROYECTOS
+       ------------------------- */
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        max-height: 320px;
+        overflow-y: auto;
+        padding-right: 5px;
+    }
+
+    .project {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .project-image {
+        height: 80px;
+        font-size: 20px;
+    }
+
+    .project h3 {
+        font-size: 14px;
+    }
+
+    .project p {
+        font-size: 11px;
+        line-height: 1.4;
+    }
+
+    .project-tags span {
+        font-size: 9px;
+        padding: 4px 6px;
+    }
+
+    .project-buttons a {
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+
+    /* Estilo sutil para la barra de scroll en celular */
+    .projects-grid::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    .projects-grid::-webkit-scrollbar-thumb {
+        background: var(--cyan);
+        border-radius: 4px;
+    }
+
+    /* -------------------------
+       FLECHAS
+       ------------------------- */
 
     .arrow {
 
         width: 40px;
 
         height: 40px;
+
+        font-size: 17px;
     }
+
 
     .arrow-left {
 
-        left: 10px;
+        left: 4px;
     }
+
 
     .arrow-right {
 
-        right: 10px;
+        right: 4px;
     }
 
-    .projects-grid {
 
-        grid-template-columns: 1fr;
+    /* -------------------------
+       INDICADORES
+       ------------------------- */
+
+    .indicators {
+
+        bottom: 25px;
     }
+
+
+    /* -------------------------
+       MODAL
+       ------------------------- */
+
+    .modal-content {
+
+        width:
+            calc(100vw - 30px);
+
+        max-height:
+            85vh;
+
+        overflow-y: auto;
+
+        padding:
+            30px
+            20px;
+    }
+
 
     .more-projects-grid {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
     }
+
+}
+
+@keyframes dataFlow {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 40px 40px;
+    }
+}
+
+.mini-code {
+    font-family: monospace;
+    background: rgba(0, 5, 15, 0.4);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+.mini-code .keyword {
+    color: var(--purple); /* Pinta 'const' de morado */
+}
+
+.mini-code .string {
+    color: var(--cyan); /* Pinta el texto entre comillas de cian */
+}
+
+/* ========================= */
+/* BOTONES Y REDES (CARD CENTRAL) */
+/* ========================= */
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    margin-top: 15px;
+}
+
+.bottom-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    width: 100%; 
+}
+
+.cv-button {
+    border: 1px solid var(--purple);
+    background: rgba(155, 92, 255, 0.08);
+    color: white;
+    padding: 10px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    width: fit-content; /* Fuerza al botón a no estirarse de más */
+}
+
+.cv-button:hover {
+    background: var(--purple);
+    color: #001019;
+    box-shadow: 0 0 25px rgba(155, 92, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+.cv-button span {
+    margin-left: 8px;
+    font-weight: bold;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px; /* Separación entre cada ícono */
+}
+
+.social-icons a {
+    color: var(--muted);
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: var(--cyan);
+    border-color: var(--cyan);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 217, 255, 0.2);
+}
+
+/* Unifica tamaño, color y altura de línea para la tarjeta Sobre Mí */
+.card-about p,
+.card-about ul {
+    font-size: 14px; 
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.card-about ul {
+    margin-left: 20px; /* Sangría para las viñetas */
+}
+
+.card-about ul li {
+    margin-bottom: 10px;
+}
+
+.contact-links span.contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    font-size: 20px;
+    color: var(--cyan);
 }
