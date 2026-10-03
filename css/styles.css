@@ -1901,3 +1901,59 @@ body::before {
     transform: translateY(-2px);
     color: white;
 }
+
+/* ========================= */
+/* FOCO VISIBLE (TECLADO) */
+/* ========================= */
+
+/*
+ * El navegador solo dibuja el contorno al usar Tab,
+ * no al hacer clic. Esto hace visible por donde va
+ * quien navega sin raton.
+ */
+
+.navbar nav button:focus-visible,
+.main-button:focus-visible,
+.cv-button:focus-visible,
+.more-projects-btn:focus-visible,
+.arrow:focus-visible,
+.close-modal:focus-visible,
+.contact-links a:focus-visible,
+.project-buttons a:focus-visible,
+.social-icons a:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 3px;
+}
+
+/* ========================= */
+/* MOVIMIENTO REDUCIDO */
+/* ========================= */
+
+/*
+ * Quien tiene activada esta opcion del sistema
+ * no debe ver animaciones infinitas de fondo.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    body::before,
+    .code-decoration,
+    .particles {
+        animation: none;
+    }
+
+    .card {
+        transition: none;
+    }
+
+    .project:hover,
+    .cv-button:hover,
+    .main-button:hover,
+    .skill:hover,
+    .contact-links a:hover,
+    .social-icons a:hover,
+    .arrow:hover,
+    .more-projects-btn:hover {
+        transform: none;
+    }
+}
