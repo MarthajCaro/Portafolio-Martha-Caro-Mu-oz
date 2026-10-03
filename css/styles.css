@@ -870,6 +870,51 @@ body::before {
 }
 
 
+.project-image.project-thumb {
+
+    height: 140px;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    text-decoration: none;
+}
+
+
+.project-thumb img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: top center;
+
+    display: block;
+
+    transition: transform 0.45s ease;
+}
+
+
+.project-thumb:hover img,
+.project-thumb:focus-visible img {
+
+    transform: scale(1.07);
+}
+
+
+.project-thumb:focus-visible {
+
+    outline: 2px solid var(--cyan);
+
+    outline-offset: 3px;
+}
+
+
 .project-two {
 
     background:
@@ -1657,6 +1702,10 @@ body::before {
     .project-image {
         height: 80px;
         font-size: 20px;
+    }
+
+    .project-image.project-thumb {
+        height: 104px;
     }
 
     .project h3 {
