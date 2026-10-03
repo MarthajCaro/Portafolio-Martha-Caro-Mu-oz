@@ -16,6 +16,14 @@ const prevBtn = document.getElementById("prevBtn");
 
 const navButtons = document.querySelectorAll("[data-slide]");
 
+/*
+ * Estado del modal de "Más proyectos".
+ * Se declara arriba para que el teclado y el modal
+ * compartan el mismo valor.
+ */
+
+let isProjectsModalOpen = false;
+
 let currentIndex = 1;
 
 const totalCards = cards.length;
@@ -119,6 +127,20 @@ navButtons.forEach((button) => {
    ===================================================== */
 
 document.addEventListener("keydown", (event) => {
+  /*
+   * Con el modal abierto solo ESC debe hacer algo:
+   * las flechas no pueden mover el carrusel
+   * que esta detrás del overlay.
+   */
+
+  if (isProjectsModalOpen) {
+    if (event.key === "Escape") {
+      closeProjectsModal();
+    }
+
+    return;
+  }
+
   if (event.key === "ArrowRight") {
     nextSlide();
   }
@@ -147,6 +169,16 @@ document.addEventListener("touchend", (event) => {
 });
 
 function handleSwipe() {
+  /*
+   * Si el modal está abierto el gesto
+   * debe servir para recorrer las tarjetas
+   * del modal, no el carrusel de fondo.
+   */
+
+  if (isProjectsModalOpen) {
+    return;
+  }
+
   const difference = touchStartX - touchEndX;
 
   if (Math.abs(difference) < 50) {
@@ -459,61 +491,70 @@ function addNeonParticles(width, height) {
    REDIMENSIONAR VENTANA
    ===================================================== */
 
+/*
+ * Sin este debounce, cada pixel que se mueve
+ * al arrastrar la ventana reprocesa la foto
+ * entera y el navegador se congela.
+ */
+
+let resizeTimeout;
+
 window.addEventListener("resize", () => {
-  createPortrait();
+  clearTimeout(resizeTimeout);
+
+  resizeTimeout = setTimeout(createPortrait, 200);
 });
 
 /* =====================================================
-   3. ANIMACIÓN DE PUNTOS
+   3. MÓDAL DE MÁS PROYECTOS
    ===================================================== */
 
-let animationFrame;
-
-function animatePortrait() {
-  /*
-   * Por ahora regeneramos
-   * algunos puntos de forma suave.
-   *
-   * Esto evita que el efecto
-   * consuma demasiado.
-   */
-
-  animationFrame = requestAnimationFrame(animatePortrait);
-}
-
-animatePortrait();
-
-/* =====================================================
-   4. MÁS PROYECTOS
-   ===================================================== */
-
-// Seleccionamos los elementos usando los nombres exactos que pusimos en tu HTML
 const moreProjects = document.getElementById("btn-more-projects");
 const projectsModal = document.getElementById("modal-projects");
-// Usamos querySelector porque en el HTML pusimos class="close-modal", no un ID
 const closeModal = document.querySelector(".close-modal");
 
-// Abrir el modal
-if (moreProjects && projectsModal) {
-  moreProjects.addEventListener("click", () => {
-    projectsModal.classList.add("show");
-  });
+function openProjectsModal() {
+  if (!projectsModal) {
+    return;
+  }
+
+  projectsModal.classList.add("show");
+  isProjectsModalOpen = true;
 }
 
-// Cerrar el modal con la X
+function closeProjectsModal() {
+  if (!projectsModal) {
+    return;
+  }
+
+  projectsModal.classList.remove("show");
+  isProjectsModalOpen = false;
+}
+
+/*
+ * Abrir el modal
+ */
+
+if (moreProjects && projectsModal) {
+  moreProjects.addEventListener("click", openProjectsModal);
+}
+
+/*
+ * Cerrar el modal con la X
+ */
+
 if (closeModal && projectsModal) {
-  closeModal.addEventListener("click", () => {
-    projectsModal.classList.remove("show");
-  });
+  closeModal.addEventListener("click", closeProjectsModal);
 }
 
 /*
  * Cerrar haciendo clic fuera del cuadro
  */
+
 if (projectsModal) {
   projectsModal.addEventListener("click", (event) => {
     if (event.target === projectsModal) {
-      projectsModal.classList.remove("show");
+      closeProjectsModal();
     }
   });
 }

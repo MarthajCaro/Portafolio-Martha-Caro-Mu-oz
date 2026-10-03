@@ -33,9 +33,9 @@
       <div class="logo"><span>&lt;</span> MC <span>/&gt;</span></div>
 
       <nav>
-        <button data-slide="0">Inicio</button>
-        <button data-slide="2">Sobre mí</button>
-        <button data-slide="1">Habilidades</button>
+<button data-slide="1">Inicio</button>
+          <button data-slide="2">Sobre mí</button>
+          <button data-slide="0">Habilidades</button>
         <button data-slide="3">Proyectos</button>
         <button data-slide="4">Experiencia</button>
         <button data-slide="5">Contacto</button>
@@ -197,13 +197,11 @@
             </li>
           </ul>
           
-          <p>
-          <div class="mini-code">
-    <span class="keyword">const</span> developer = {<br />
-    &nbsp;&nbsp;nombre: <span class="string">"Martha Caro"</span>,<br />
-    &nbsp;&nbsp;rol: <span class="string">"Full Stack Developer"</span><br />
-    };
-            </p>
+<div class="mini-code">
+            <span class="keyword">const</span> developer = {<br />
+            &nbsp;&nbsp;nombre: <span class="string">"Martha Caro"</span>,<br />
+            &nbsp;&nbsp;rol: <span class="string">"Full Stack Developer"</span><br />
+          };
           </div>
         </article>
 
@@ -327,7 +325,7 @@
             </div>
           </div>
 
-          <button onclick="document.getElementById('modal-projects').classList.add('show')" class="more-projects-btn">
+          <button id="btn-more-projects" class="more-projects-btn">
             Más proyectos →
           </button>
         </article>
@@ -404,7 +402,7 @@
         LinkedIn
     </a>
 </div>
-          <button class="main-button" data-slide="0">
+          <button class="main-button" data-slide="1">
             VOLVER AL INICIO
             <span>↻</span>
           </button>
@@ -429,10 +427,10 @@
 
     <!-- MODAL MÁS PROYECTOS -->
 
-    <div id="modal-projects" class="projects-modal">
+    <div id="modal-projects" class="projects-modal" role="dialog" aria-modal="true" aria-labelledby="modal-projects-title">
     <div class="modal-content">
-        <button class="close-modal">×</button>
-        <h2>Más proyectos</h2>
+        <button class="close-modal" aria-label="Cerrar">×</button>
+        <h2 id="modal-projects-title">Más proyectos</h2>
         <div class="modal-line"></div>
 
     <div class="more-projects-grid">
