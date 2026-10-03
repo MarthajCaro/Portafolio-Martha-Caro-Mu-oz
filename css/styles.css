@@ -1909,7 +1909,7 @@ body::before {
 /*
  * El navegador solo dibuja el contorno al usar Tab,
  * no al hacer clic. Esto hace visible por donde va
- * quien navega sin raton.
+ * quien navega sin ratón.
  */
 
 .navbar nav button:focus-visible,
@@ -1930,7 +1930,7 @@ body::before {
 /* ========================= */
 
 /*
- * Quien tiene activada esta opcion del sistema
+ * Quien tiene activada esta opción del sistema
  * no debe ver animaciones infinitas de fondo.
  */
 
